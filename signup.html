@@ -1,0 +1,90 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Mercy chelagat</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+         
+      </ul>
+    </nav>
+  </header>
+
+
+  <main class="wrap">
+    <form class="card" novalidate>
+      <h1>Create your account</h1>
+
+      <label for="name">Full name</label>
+      <input id="name" name="name" type="text" placeholder="Jane Doe" required />
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" placeholder="jane@example.com" required />
+
+      <label for="password">Password</label>
+      <div class="password">
+        <input id="password" name="password" type="password" placeholder="••••••••" required minlength="8" />
+        <button class="toggle" type="button" aria-label="Show password">👁</button>
+      </div>
+
+      <label for="confirm">Confirm password</label>
+      <input id="confirm" name="confirm" type="password" placeholder="••••••••" required minlength="8" />
+
+      <label class="terms">
+        <input type="checkbox" id="terms" required />
+        I agree to the <a href="#">Terms & Conditions</a>
+      </label>
+
+      <p class="error" aria-live="polite"></p>
+
+      <button class="primary" type="submit">Create account</button>
+      <p class="muted">Already have an account? <a href="#">Sign in</a></p>
+    </form>
+  </main>
+
+  <script>
+    const form = document.querySelector('form');
+    const err = document.querySelector('.error');
+    const pass = document.getElementById('password');
+    const confirm = document.getElementById('confirm');
+    document.querySelector('.toggle').onclick = () => {
+      pass.type = pass.type === 'password' ? 'text' : 'password';
+    };
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      err.textContent = '';
+      const okLen = pass.value.length >= 8;
+      const okMix = /[A-Za-z]/.test(pass.value) && /\d/.test(pass.value);
+      if (!okLen || !okMix) {
+        err.textContent = 'Password must be at least 8 characters and include letters and numbers.';
+        return;
+      }
+      if (pass.value !== confirm.value) {
+        err.textContent = 'Passwords do not match.';
+        return;
+      }
+      form.querySelector('.primary').textContent = 'Creating...';
+      form.querySelector('.primary').disabled = true;
+      setTimeout(() => {
+        err.textContent = '✅ Account created successfully.';
+        form.querySelector('.primary').textContent = 'Create account';
+        form.querySelector('.primary').disabled = false;
+        form.reset();
+      }, 800);
+    });
+  </script>
+</body>
+</html>

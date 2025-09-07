@@ -1,0 +1,47 @@
+/* styles.css */
+:root{
+  --bg: #f6f7fb;
+  --card:#ffffff;
+  --text:#1f2937;
+  --primary:#2563eb;
+  --muted:#6b7280;
+  --ring:#93c5fd;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:system-ui,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;
+  color:var(--text); background:linear-gradient(135deg,#eef2ff, #f8fafc);
+  min-height:100svh; display:grid; place-items:center;
+}
+.wrap{width:min(92vw,480px); padding:24px}
+.card{
+  background:var(--card); border-radius:20px; padding:28px; box-shadow:0 10px 30px rgba(0,0,0,.08);
+  display:grid; gap:12px;
+}
+h1{margin:0 0 8px; font-size:1.4rem}
+label{font-size:.9rem}
+input, .password{
+  width:100%; padding:12px 14px; border:1px solid #e5e7eb; border-radius:12px; background:#fff;
+  outline:none; font:inherit;
+}
+.password{display:flex; align-items:center; gap:8px; padding:0}
+.password input{border:none; flex:1; padding:12px 14px}
+.password .toggle{
+  border:none; background:transparent; cursor:pointer; padding:0 12px; font-size:1rem;
+}
+input:focus, .password:focus-within{border-color:var(--ring); box-shadow:0 0 0 3px color-mix(in oklab, var(--ring), transparent 70%)}
+.terms{display:flex; align-items:center; gap:8px; font-size:.9rem}
+.terms a{color:var(--primary); text-decoration:none}
+.terms a:hover{text-decoration:underline}
+.primary{
+  border:none; background:var(--primary); color:#fff; padding:12px 16px; border-radius:12px;
+  cursor:pointer; font-weight:600; transition:transform .15s ease;
+}
+.primary:disabled{opacity:.7; cursor:not-allowed}
+.primary:hover{transform:translateY(-1px)}
+.muted{color:var(--muted); font-size:.9rem; text-align:center; margin:6px 0 0}
+.error{min-height:1.2em; color:#b91c1c; font-size:.9rem}
+@media (prefers-reduced-motion:no-preference){
+  .card{transition:box-shadow .2s ease, transform .2s ease}
+  .card:hover{transform:translateY(-1px); box-shadow:0 14px 40px rgba(0,0,0,.10)}
+}
